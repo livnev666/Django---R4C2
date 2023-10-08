@@ -1,0 +1,14 @@
+{% extends 'robots/base.html' %}
+
+
+{% block title %} Все о модели {{one_robot.model}} {% endblock %}
+
+{% block content %}
+{% include 'includes/navbar.html' %}
+    <hr>
+    <h2>Робот</h2>
+    <p>Серия: {{one_robot.serial}}</p>
+    <p>Модель: {{one_robot.model}}</p>
+    <p>Версия: {{one_robot.version}}</p>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'robots/base.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% load static %}
+
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'robots/css/style_table.css' %}">
+{% endblock %}
+
+{% regroup persons by group as groups %}
+
+{% block content %}
+{% include 'includes/navbar.html' %}
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Модель</th>
+                <th>Версия</th>
+                <th>Количество</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="active-row">
+                    {% for i in serial_robots %}
+                        <p><a href="{% url 'robot-id' pk=i.id %}">{{i.model}}</a></p>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for i in serial_robots %}
+                        <p>{{i.version}}</p>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for i in serial_robots %}
+                        <p>{{i.stock}}</p>
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<p><h4><a href="{% url 'xls_robots' %}">Скачать файл Exel</a></h4></p>
+<p>Хотел сделать так, что если кликаешь по серии, то переходишь на другую станицу</p>
+<p>с отфильтрованным списком по модели, по которой можно кликнуть и </p>
+<p>скачать отфильтрованный список, но пока не знаю как это сделать.</p>
+{% endblock %}

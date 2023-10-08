@@ -1,0 +1,44 @@
+{% extends 'robots/base.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% load static %}
+
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'robots/css/style_table.css' %}">
+{% endblock %}
+
+
+{% block content %}
+{% include 'includes/navbar.html' %}
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Серия</th>
+                <th>Модель</th>
+                <th>Версия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    {% for i in all_robots %}
+                        <p><a href="{% url 'series_robot' %}">{{i.serial}}</a></p>
+                    {% endfor %}
+                </td>
+                <td class="active-row">
+                    {% for i in all_robots %}
+                        <p>{{i.model}}</p>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for i in all_robots %}
+                        <p>{{i.version}}</p>
+                    {% endfor %}
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+<p>Можно кликнуть по серии робота</p>
+{% endblock %}
